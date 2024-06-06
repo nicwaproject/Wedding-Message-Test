@@ -19,7 +19,7 @@ body {
   margin-bottom: 20px;
 }
 
-input[type="text"], button {
+input[type="text"], button, input[type="checkbox"] {
   padding: 10px;
   margin-bottom: 10px;
   width: calc(100% - 20px);
@@ -62,4 +62,9 @@ button:hover {
 
 .message-text {
   margin-top: 5px;
+}
+
+/* Gaya untuk kotak centang */
+input[type="checkbox"] {
+  margin-right: 5px;
 }
