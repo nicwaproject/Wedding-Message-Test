@@ -42,8 +42,7 @@ function displayMessages(messages) {
       <span class="sender-name">${senderName}</span>: 
       <span class="message-text">${message}</span>
       <div>
-        <input type="checkbox" ${attendanceConfirmed ? 'checked' : ''} disabled>
-        <label for="attendance">Attending</label>
+        <span>Attendance: ${attendanceConfirmed}</span>
       </div>
     `;
     messagesList.appendChild(listItem);
@@ -59,14 +58,14 @@ document.getElementById('messageForm').addEventListener('submit', async (event) 
 
   const senderName = senderNameInput.value.trim();
   const message = messageInput.value.trim();
-  const attendanceConfirmed = attendanceConfirmedInput.checked;
+  const attendanceConfirmed = attendanceConfirmedInput.value;
 
   if (senderName && message) {
     try {
       await sendMessage(senderName, message, attendanceConfirmed);
       senderNameInput.value = ''; // Mengosongkan input setelah mengirim pesan
       messageInput.value = '';
-      attendanceConfirmedInput.checked = false;
+      attendanceConfirmedInput.selectedIndex = 0; // Mengatur kembali opsi ke opsi pertama (Bisa)
       const messages = await getMessages();
       displayMessages(messages);
     } catch (error) {
