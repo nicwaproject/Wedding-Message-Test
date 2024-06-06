@@ -1,15 +1,17 @@
 const backendUrl = 'https://weddinginvitation.glitch.me/api/messages';
 
-async function sendMessage(message) {
+// Fungsi untuk mengirim pesan ke backend
+async function sendMessage(senderName, message, attendanceConfirmed) {
   try {
     const response = await fetch(backendUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ message: message }),
+      body: JSON.stringify({ senderName, message, attendanceConfirmed }),
     });
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
     console.error('Error sending message:', error);
@@ -17,6 +19,7 @@ async function sendMessage(message) {
   }
 }
 
+// Fungsi untuk mengambil pesan dari backend
 async function getMessages() {
   try {
     const response = await fetch(backendUrl);
@@ -28,24 +31,42 @@ async function getMessages() {
   }
 }
 
+// Fungsi untuk menampilkan pesan di frontend
 function displayMessages(messages) {
   const messagesList = document.getElementById('messagesList');
   messagesList.innerHTML = '';
-  messages.forEach(message => {
+  messages.forEach(({ senderName, message, attendanceConfirmed }) => {
     const listItem = document.createElement('li');
-    listItem.textContent = message;
+    listItem.classList.add('message');
+    listItem.innerHTML = `
+      <span class="sender-name">${senderName}</span>: 
+      <span class="message-text">${message}</span>
+      <div>
+        <input type="checkbox" ${attendanceConfirmed ? 'checked' : ''} disabled>
+        <label for="attendance">Attending</label>
+      </div>
+    `;
     messagesList.appendChild(listItem);
   });
 }
 
+// Event listener saat form di-submit
 document.getElementById('messageForm').addEventListener('submit', async (event) => {
   event.preventDefault(); // Mencegah form dari submit default
+  const senderNameInput = document.getElementById('senderNameInput');
   const messageInput = document.getElementById('messageInput');
-  const message = messageInput.value.trim(); // Menghapus spasi di awal/akhir pesan
-  if (message) {
+  const attendanceConfirmedInput = document.getElementById('attendanceConfirmedInput');
+
+  const senderName = senderNameInput.value.trim();
+  const message = messageInput.value.trim();
+  const attendanceConfirmed = attendanceConfirmedInput.checked;
+
+  if (senderName && message) {
     try {
-      await sendMessage(message);
-      messageInput.value = ''; // Mengosongkan input setelah mengirim pesan
+      await sendMessage(senderName, message, attendanceConfirmed);
+      senderNameInput.value = ''; // Mengosongkan input setelah mengirim pesan
+      messageInput.value = '';
+      attendanceConfirmedInput.checked = false;
       const messages = await getMessages();
       displayMessages(messages);
     } catch (error) {
@@ -54,6 +75,7 @@ document.getElementById('messageForm').addEventListener('submit', async (event) 
   }
 });
 
+// Saat halaman dimuat, ambil dan tampilkan pesan
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     const messages = await getMessages();
