@@ -1,0 +1,54 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+#header {
+  text-align: center;
+}
+
+#form-section {
+  margin-bottom: 20px;
+}
+
+#messageInput {
+  width: 70%;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#messages-section {
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+#messagesList {
+  list-style: none;
+  padding: 0;
+}
+
+#messagesList li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+}
