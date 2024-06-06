@@ -15,9 +15,11 @@
       <form id="messageForm">
         <input type="text" id="senderNameInput" placeholder="Your Name" required>
         <input type="text" id="messageInput" placeholder="Enter your message" required>
-        <label for="attendanceConfirmedInput">
-          <input type="checkbox" id="attendanceConfirmedInput"> Attending
-        </label>
+        <select id="attendanceConfirmedInput">
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="unsure">Unsure</option>
+        </select>
         <button type="submit">Send</button>
       </form>
     </section>
