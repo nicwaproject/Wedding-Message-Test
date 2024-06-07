@@ -3,31 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Message App</title>
+  <title>Guestbook</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <section id="header">
-      <h1>Message App</h1>
-    </section>
-    <section id="form-section">
-      <form id="messageForm">
-        <input type="text" id="senderNameInput" placeholder="Your Name" required>
-        <input type="text" id="messageInput" placeholder="Enter your message" required>
-        <select id="attendanceConfirmedInput">
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-          <option value="unsure">Unsure</option>
-        </select>
-        <button type="submit">Send</button>
-      </form>
-    </section>
-    <section id="messages-section">
-      <h2>Messages</h2>
-      <ul id="messagesList"></ul>
-    </section>
-  </div>
+  <section id="guestbook">
+    <h1>Guestbook</h1>
+    <form id="messageForm">
+      <input type="text" id="senderName" placeholder="Your Name" required>
+      <textarea id="message" placeholder="Your Message" required></textarea>
+      <select id="attendanceConfirmed" required>
+        <option value="bisa">Bisa</option>
+        <option value="tidak">Tidak</option>
+        <option value="ragu-ragu">Ragu-ragu</option>
+      </select>
+      <button type="submit">Send</button>
+    </form>
+    <div id="messages"></div>
+  </section>
   <script src="script.js"></script>
 </body>
 </html>
