@@ -2,69 +2,66 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
+  background-color: #f4f4f4;
 }
 
-.container {
-  max-width: 800px;
+#guestbook {
+  max-width: 600px;
   margin: 50px auto;
-  padding: 0 20px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-#header {
+h1 {
   text-align: center;
 }
 
-#form-section {
-  margin-bottom: 20px;
+form {
+  display: flex;
+  flex-direction: column;
 }
 
-input[type="text"], button, input[type="checkbox"] {
-  padding: 10px;
+input, textarea, select {
   margin-bottom: 10px;
-  width: calc(100% - 20px);
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 button {
-  background-color: #3897f0;
-  color: white;
+  padding: 10px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #333;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #357ae8;
+  background-color: #555;
 }
 
-#messages-section {
-  border-top: 1px solid #ddd;
-  padding-top: 20px;
-}
-
-#messagesList {
-  list-style: none;
-  padding: 0;
+#messages {
+  margin-top: 20px;
 }
 
 .message {
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 5px;
   padding: 10px;
-  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
 }
 
-.sender-name {
-  font-weight: bold;
+.message:last-child {
+  border-bottom: none;
 }
 
-.message-text {
-  margin-top: 5px;
+.message h3 {
+  margin: 0;
+  font-size: 1.2rem;
 }
 
-/* Gaya untuk kotak centang */
-input[type="checkbox"] {
-  margin-right: 5px;
+.message p {
+  margin: 5px 0;
 }
