@@ -3,24 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guestbook</title>
+  <title>Wedding Invitation</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <section id="guestbook">
-    <h1>Guestbook</h1>
-    <form id="messageForm">
-      <input type="text" id="senderName" placeholder="Your Name" required>
-      <textarea id="message" placeholder="Your Message" required></textarea>
-      <select id="attendanceConfirmed" required>
-        <option value="bisa">Bisa</option>
-        <option value="tidak">Tidak</option>
-        <option value="ragu-ragu">Ragu-ragu</option>
+  <div class="container">
+    <h1>Wedding Invitation</h1>
+    <form id="rsvp-form">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <select id="attendance" required>
+        <option value="">Will you attend?</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+        <option value="maybe">Maybe</option>
       </select>
-      <button type="submit">Send</button>
+      <button type="submit">Submit</button>
     </form>
-    <div id="messages"></div>
-  </section>
+    <h2>Messages</h2>
+    <ul id="messages"></ul>
+    <h2>Attendance Count</h2>
+    <ul id="attendance-count"></ul>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
