@@ -30,7 +30,7 @@ async function loadMessages() {
 }
 
 async function loadAttendanceCount() {
-  const response = await fetch('https://glitch.com/edit/#!/weddinginvitation/messages');
+  const response = await fetch('https://glitch.com/edit/#!/weddinginvitation/attendance-count');
   const attendanceCount = await response.json();
 
   const attendanceList = document.getElementById('attendance-count');
