@@ -1,38 +1,48 @@
-document.getElementById('messageForm').addEventListener('submit', async (e) => {
+document.getElementById('rsvp-form').addEventListener('submit', async (e) => {
   e.preventDefault();
-  
-  const senderName = document.getElementById('senderName').value;
-  const message = document.getElementById('message').value;
-  const attendanceConfirmed = document.getElementById('attendanceConfirmed').value;
-  
-  const response = await fetch('https://weddinginvitation.glitch.me/api/messages', {
+  const name = document.getElementById('name').value;
+  const attendance = document.getElementById('attendance').value;
+
+  const response = await fetch('https://glitch.com/edit/#!/weddinginvitation', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ senderName, message, attendanceConfirmed })
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, attendance })
   });
-  
-  const result = await response.json();
-  if (result.success) {
+
+  if (response.ok) {
     loadMessages();
-    document.getElementById('messageForm').reset();
-  } else {
-    alert('Failed to send message');
+    loadAttendanceCount();
   }
 });
 
 async function loadMessages() {
-  const response = await fetch('https://weddinginvitation.glitch.me/api/messages');
+  const response = await fetch('https://glitch.com/edit/#!/weddinginvitation');
   const messages = await response.json();
-  const messagesDiv = document.getElementById('messages');
-  messagesDiv.innerHTML = '';
-  messages.forEach(msg => {
-    const msgDiv = document.createElement('div');
-    msgDiv.classList.add('message');
-    msgDiv.innerHTML = `<h3>${msg.senderName}</h3><p>${msg.message}</p><p>Attendance: ${msg.attendanceConfirmed}</p>`;
-    messagesDiv.appendChild(msgDiv);
+
+  const messagesList = document.getElementById('messages');
+  messagesList.innerHTML = '';
+
+  messages.forEach(message => {
+    const listItem = document.createElement('li');
+    listItem.textContent = `${message.name}: ${message.attendance}`;
+    messagesList.appendChild(listItem);
   });
 }
 
-window.onload = loadMessages;
+async function loadAttendanceCount() {
+  const response = await fetch('https://glitch.com/edit/#!/weddinginvitation');
+  const attendanceCount = await response.json();
+
+  const attendanceList = document.getElementById('attendance-count');
+  attendanceList.innerHTML = '';
+
+  attendanceCount.forEach(item => {
+    const listItem = document.createElement('li');
+    listItem.textContent = `${item._id}: ${item.count}`;
+    attendanceList.appendChild(listItem);
+  });
+}
+
+loadMessages();
+loadAttendanceCount();
+setInterval(loadAttendanceCount, 10000); // Refresh setiap 10 detik
