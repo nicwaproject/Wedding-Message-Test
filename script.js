@@ -3,7 +3,7 @@ document.getElementById('rsvp-form').addEventListener('submit', async (e) => {
   const name = document.getElementById('name').value;
   const attendance = document.getElementById('attendance').value;
 
-  const response = await fetch('https://glitch.com/edit/#!/weddinginvitation/messages', {
+  const response = await fetch('https://weddinginvitation.glitch.me/messages', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, attendance })
@@ -16,7 +16,7 @@ document.getElementById('rsvp-form').addEventListener('submit', async (e) => {
 });
 
 async function loadMessages() {
-  const response = await fetch('https://glitch.com/edit/#!/weddinginvitation/messages');
+  const response = await fetch('https://weddinginvitation.glitch.me/messages');
   const messages = await response.json();
 
   const messagesList = document.getElementById('messages');
@@ -30,7 +30,7 @@ async function loadMessages() {
 }
 
 async function loadAttendanceCount() {
-  const response = await fetch('https://glitch.com/edit/#!/weddinginvitation/attendance-count');
+  const response = await fetch('https://weddinginvitation.glitch.me/attendance-count');
   const attendanceCount = await response.json();
 
   const attendanceList = document.getElementById('attendance-count');
