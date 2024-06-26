@@ -5,63 +5,55 @@ body {
   background-color: #f4f4f4;
 }
 
-#guestbook {
-  max-width: 600px;
+.container {
+  max-width: 800px;
   margin: 50px auto;
   padding: 20px;
   background-color: #fff;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
-h1 {
+h1, h2 {
   text-align: center;
+  color: #333;
 }
 
 form {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-input, textarea, select {
-  margin-bottom: 10px;
+input, select, button {
   padding: 10px;
-  font-size: 1rem;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
 button {
-  padding: 10px;
-  font-size: 1rem;
+  background-color: #28a745;
   color: #fff;
-  background-color: #333;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #555;
+  background-color: #218838;
 }
 
-#messages {
-  margin-top: 20px;
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-.message {
+li {
   padding: 10px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ddd;
 }
 
-.message:last-child {
+li:last-child {
   border-bottom: none;
-}
-
-.message h3 {
-  margin: 0;
-  font-size: 1.2rem;
-}
-
-.message p {
-  margin: 5px 0;
 }
