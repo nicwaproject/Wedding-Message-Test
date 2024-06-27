@@ -45,4 +45,7 @@ async function loadAttendanceCount() {
 
 loadMessages();
 loadAttendanceCount();
-setInterval(loadAttendanceCount, 10000); // Refresh setiap 10 detik
+setInterval(() => {
+  loadMessages();
+  loadAttendanceCount();
+}, 10000); // Refresh setiap 5 detik
