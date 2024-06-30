@@ -1,7 +1,4 @@
-// Mendapatkan parameter dari URL
-const urlParams = new URLSearchParams(window.location.search);
-const isCouple = urlParams.get('isCouple') === 'true';
-const weddingId = urlParams.get('weddingId');
+const weddingId = 'uniqueWeddingIdForEachCouple'; // Ganti dengan ID pasangan yang sesuai
 
 document.getElementById('rsvp-form').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -9,7 +6,7 @@ document.getElementById('rsvp-form').addEventListener('submit', async (e) => {
   const attendance = document.getElementById('attendance').value;
   const message = document.getElementById('message').value;
 
-  const response = await fetch('https://weddinginvitation.glitch.me/messages', {
+  const response = await fetch('https://handle-pesan-di-website-pernikahan.glitch.me/messages', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ weddingId, name, attendance, message })
@@ -22,7 +19,7 @@ document.getElementById('rsvp-form').addEventListener('submit', async (e) => {
 });
 
 async function loadMessages() {
-  const response = await fetch(`https://weddinginvitation.glitch.me/messages?weddingId=${weddingId}`);
+  const response = await fetch(`https://handle-pesan-di-website-pernikahan.glitch.me/messages?weddingId=${weddingId}`);
   const messages = await response.json();
 
   const messagesList = document.getElementById('messages');
@@ -36,7 +33,7 @@ async function loadMessages() {
 }
 
 async function loadAttendanceCount() {
-  const response = await fetch(`https://weddinginvitation.glitch.me/attendance-count?weddingId=${weddingId}`);
+  const response = await fetch(`https://handle-pesan-di-website-pernikahan.glitch.me/attendance-count?weddingId=${weddingId}`);
   const attendanceCount = await response.json();
 
   const attendanceList = document.getElementById('attendance-count');
@@ -49,28 +46,6 @@ async function loadAttendanceCount() {
   });
 }
 
-// Mengatur WebSocket dengan parameter isCouple
-const socket = new WebSocket(`wss://weddinginvitation.glitch.me/?isCouple=${isCouple}`);
-
-socket.addEventListener('open', function (event) {
-  console.log('Connected to WebSocket server');
-});
-
-socket.addEventListener('message', function (event) {
-  const data = JSON.parse(event.data);
-
-  if (data.type === 'newMessage') {
-    // Menambahkan pesan baru ke daftar pesan
-    const messagesList = document.getElementById('messages');
-    const listItem = document.createElement('li');
-    listItem.innerHTML = `<strong>${data.data.name}</strong><br><em>${data.data.message}</em>`;
-    messagesList.appendChild(listItem);
-  }
-});
-
 loadMessages();
 loadAttendanceCount();
-setInterval(() => {
-  loadMessages();
-  loadAttendanceCount();
-}, 5000); // Refresh setiap 5 detik
+setInterval(loadAttendanceCount, 10000); // Refresh setiap 10 detik
